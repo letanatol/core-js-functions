@@ -10,7 +10,7 @@
 
 /**
  * Returns the name of the current function.
- *
+ * Возвращает имя текущей функции.
  * @return {string} - The name of the current function.
  *
  * @example
@@ -18,7 +18,7 @@
  *
  */
 function getCurrentFunctionName() {
-  throw new Error('Not implemented');
+  return getCurrentFunctionName.name;
 }
 
 /**
