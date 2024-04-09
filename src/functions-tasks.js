@@ -63,6 +63,7 @@ function getArgumentsCount(funcs) {
 
 /**
  * Returns the math power function with the specified exponent
+ * Возвращает math power function с указанной экспонентой
  *
  * @param {number} exponent
  * @return {Function}
@@ -77,8 +78,12 @@ function getArgumentsCount(funcs) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  function powerFunction(number) {
+    return number ** exponent;
+  }
+
+  return powerFunction;
 }
 
 /**
