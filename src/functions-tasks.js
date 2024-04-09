@@ -23,6 +23,7 @@ function getCurrentFunctionName() {
 
 /**
  * Returns the body of the function passed as argument.
+ * Возвращает тело функции, переданное в качестве аргумента.
  *
  * @params {function} func - Function to get the body.
  * @return {string} - The body of the function passed as argument.
@@ -32,8 +33,11 @@ function getCurrentFunctionName() {
  *   getFunctionBody(hiHello) => "function hiHello() { console.log('hello world'); }"
  *
  */
-function getFunctionBody(/* func */) {
-  throw new Error('Not implemented');
+function getFunctionBody(func) {
+  if (func) {
+    return func.toString();
+  }
+  return false;
 }
 
 /**
