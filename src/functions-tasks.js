@@ -196,6 +196,7 @@ function logger(/* func, logFunc */) {
 
 /**
  * Return the function with partial applied arguments
+ * Вернуть функцию с частичными примененными аргументами
  *
  * @param {Function} fn
  * @return {Function}
@@ -207,8 +208,12 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  function partialFunction(...args) {
+    return fn(...args1, ...args);
+  }
+
+  return partialFunction;
 }
 
 /**
