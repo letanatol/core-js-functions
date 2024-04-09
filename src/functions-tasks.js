@@ -106,6 +106,8 @@ function getPolynom() {
 /**
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
+ * Запоминает переданную функцию и возвращает функцию
+ * который запускается первый раз, вызывает переданную функцию и затем всегда возвращает кэшированный результат.
  *
  * @params {Function} func - function to memoize
  * @return {Function} memoized function
@@ -117,8 +119,17 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  const cash = new Map();
+
+  return function memoizedFunction(arg) {
+    if (cash.has(arg)) {
+      return cash.get(arg);
+    }
+    const result = func(arg);
+    cash.set(arg, result);
+    return result;
+  };
 }
 
 /**
