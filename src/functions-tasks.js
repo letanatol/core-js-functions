@@ -135,6 +135,8 @@ function memoize(func) {
 /**
  * Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
+ * Возвращает функцию, пытающуюся вызвать переданную функцию, и если она throws,
+ * повторение заданного числа попыток.
  *
  * @param {Function} func
  * @param {number} attempts
@@ -147,8 +149,22 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  return function retryer() {
+    let attempt = 0;
+    while (attempt < attempts) {
+      try {
+        return func(attempt + 1);
+      } catch (error) {
+        if (attempt === attempts - 1) {
+          throw error;
+        }
+      }
+      attempt += 1;
+    }
+
+    return null;
+  };
 }
 
 /**
