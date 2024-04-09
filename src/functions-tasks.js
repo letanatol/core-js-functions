@@ -42,7 +42,7 @@ function getFunctionBody(func) {
 
 /**
  * Returns the array where each element is the count of function arguments.
- *
+ * Возвращает массив, в котором каждый элемент является числом аргументов функции.
  * @params {array} funcs - The array of functions.
  * @return {array} - The array of arguments count.
  *
@@ -54,8 +54,11 @@ function getFunctionBody(func) {
  *  ]) => [0, 1, 2]
  *
  */
-function getArgumentsCount(/* funcs */) {
-  throw new Error('Not implemented');
+function getArgumentsCount(funcs) {
+  const result = [];
+  funcs.forEach((item) => result.push(item.length));
+
+  return result;
 }
 
 /**
