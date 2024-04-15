@@ -172,6 +172,10 @@ function retry(func, attempts) {
  * Logger has to log the start and end of calling the specified function.
  * Logger has to log the arguments of invoked function.
  * The format of output log is:
+ * Возвращает упаковщик журнала для указанного метода,
+ * Регистратор должен регистрировать начало и конец вызова указанной функции.
+ * Регистратор должен регистрировать аргументы вызываемой функции.
+ * Формат журнала вывода:
  * <function name>(<arg1>, <arg2>,...,<argN>) starts
  * <function name>(<arg1>, <arg2>,...,<argN>) ends
  *
@@ -190,8 +194,22 @@ function retry(func, attempts) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger(func, logFunc) {
+  return function logWrapper(...args) {
+    const start = `${func.name}(${args
+      .map((arg) => JSON.stringify(arg))
+      .join(',')}) starts`;
+    logFunc(start);
+
+    const result = func(...args);
+
+    const end = `${func.name}(${args
+      .map((arg) => JSON.stringify(arg))
+      .join(',')}) ends`;
+    logFunc(end);
+
+    return result;
+  };
 }
 
 /**
