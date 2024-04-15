@@ -88,6 +88,7 @@ function getPowerFunction(exponent) {
 
 /**
  * Returns the polynom function of one argument based on specified coefficients.
+ * Возвращает функцию полинома одного аргумента на основе заданных коэффициентов.
  * See: https://en.wikipedia.org/wiki/Polynomial#Definition
  *
  * @params {integer}
@@ -99,8 +100,16 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...coefficients) {
+  return function calcPolynom(value) {
+    let result = 0;
+
+    for (let i = 0; i < coefficients.length; i += 1) {
+      result += coefficients[i] * value ** (coefficients.length - 1 - i);
+    }
+
+    return result;
+  };
 }
 
 /**
